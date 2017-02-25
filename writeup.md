@@ -24,6 +24,8 @@ For each cluster is draw a line, on and empty image, using the averaged M and Q 
 In order to stabilize the lines and reduce the flickering, the lines are averaged with the one draw on the previous frame. 
 The original image and the one just generated are then blend into one and returned to MoviePy to be reassembled into a video.
 
+Specifically to the draw_lines() function, I didn't really changed it because I changed directly hough_lines function to make it return the list of segments instead of an image, so I would have been able to perform futher operations before drawing.
+
 ###2. Identify potential shortcomings with your current pipeline
 
 - This pipeline as it is right now is manually tuned to work in the given condition of the video, but as it show in challenge.mp4 negligible (to a human) changes of color in the image or additional noise easily disturb the detection. It is very likely that this pipeline would fail even for simple changes of lighting or weather conditions.
