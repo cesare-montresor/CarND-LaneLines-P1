@@ -11807,7 +11807,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="prompt input_prompt">In&nbsp;[190]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#importing some useful packages</span>
@@ -11825,7 +11825,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="prompt input_prompt">In&nbsp;[191]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># moved up from cell ~33</span>
@@ -11855,7 +11855,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="prompt input_prompt">In&nbsp;[192]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#reading in an image</span>
@@ -11881,11 +11881,11 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[100]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[192]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x11de26710&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x116b6fa90&gt;</pre>
 </div>
 
 </div>
@@ -13490,7 +13490,7 @@ ca62UZ0BqAAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="prompt input_prompt">In&nbsp;[193]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">grayscale</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
@@ -13616,7 +13616,7 @@ ca62UZ0BqAAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="prompt input_prompt">In&nbsp;[194]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;test_images/&quot;</span><span class="p">)</span>
@@ -13630,7 +13630,7 @@ ca62UZ0BqAAAAABJRU5ErkJggg==
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[102]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[194]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -13670,7 +13670,7 @@ ca62UZ0BqAAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="prompt input_prompt">In&nbsp;[195]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Build your pipeline that will draw lane lines on the test_images</span>
@@ -13704,10 +13704,12 @@ imageio.plugins.ffmpeg.download()</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[133]:</div>
+<div class="prompt input_prompt">In&nbsp;[196]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_image</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">last_lines</span> <span class="o">=</span> <span class="p">[[],[]]</span>
+<span class="k">def</span> <span class="nf">process_image</span><span class="p">(</span><span class="n">image</span><span class="p">,):</span>
+    <span class="k">global</span> <span class="n">last_lines</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">image</span> <span class="c1">#in case no lines are found :(</span>
     <span class="c1"># NOTE: The output you return should be a color image (3 channel) for processing video below</span>
     <span class="c1"># TODO: put your pipeline here,</span>
@@ -13717,67 +13719,75 @@ imageio.plugins.ffmpeg.download()</code></pre>
     <span class="n">width</span>  <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">height</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     
+    <span class="c1">#prepareing image for lines detection</span>
     <span class="n">gray</span> <span class="o">=</span> <span class="n">grayscale</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="n">blur</span> <span class="o">=</span> <span class="n">gaussian_blur</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">edges</span> <span class="o">=</span> <span class="n">canny</span><span class="p">(</span><span class="n">blur</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
-    
-    <span class="c1">#img = cv2.cvtColor(edges,cv2.COLOR_GRAY2BGR)</span>
-    <span class="c1">#return img</span>
-
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">canny</span><span class="p">(</span><span class="n">blur</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">150</span><span class="p">)</span>
     
     <span class="n">yOffset</span> <span class="o">=</span> <span class="mi">35</span> <span class="c1">#given a triangular ROI, adjust y of to match &#39;horizon&#39;</span>
     <span class="n">borderBottom</span> <span class="o">=</span> <span class="mi">50</span>
     <span class="n">borderSides</span> <span class="o">=</span> <span class="mi">50</span>
     
+    <span class="c1"># mask the image keepinga triangual shape</span>
     <span class="n">xCenter</span>     <span class="o">=</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span>
     <span class="n">yCenter</span>     <span class="o">=</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span>
     <span class="n">yRoi</span> <span class="o">=</span> <span class="n">yCenter</span><span class="o">+</span><span class="n">yOffset</span>
-
-    <span class="n">vertexes</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="c1">#REMEMBER: fillPoly want the vertexes wraped in an extra array or fails an assertion</span>
+    <span class="n">vertexes</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> 
         <span class="p">[</span><span class="n">xCenter</span><span class="p">,</span><span class="n">yRoi</span><span class="p">],</span>
         <span class="p">[</span><span class="n">width</span><span class="o">-</span><span class="n">borderSides</span><span class="p">,</span><span class="n">height</span><span class="p">],</span>
         <span class="p">[</span><span class="n">borderSides</span><span class="p">,</span><span class="n">height</span><span class="o">-</span><span class="n">borderBottom</span><span class="p">]</span>
     <span class="p">]</span> <span class="p">]</span>
     <span class="n">edges_roi</span> <span class="o">=</span> <span class="n">region_of_interest</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vertexes</span><span class="p">))</span> <span class="p">)</span>
     
+    <span class="c1">#Extract lines</span>
     <span class="n">rho</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
     <span class="n">threshold</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">min_line_len</span> <span class="o">=</span> <span class="mi">35</span>
     <span class="n">max_line_gap</span> <span class="o">=</span> <span class="mi">20</span>
     
-    <span class="n">minM</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">minM</span> <span class="o">=</span> <span class="mf">0.5</span> 
     <span class="n">lines_raw</span> <span class="o">=</span> <span class="n">hough_lines</span><span class="p">(</span><span class="n">edges_roi</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">min_line_len</span><span class="p">,</span> <span class="n">max_line_gap</span><span class="p">)</span>
+    
+    <span class="c1">#Calculate M and Q for each line</span>
     <span class="n">lines_mq</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines_raw</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
             <span class="n">m</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span>
             <span class="n">q</span> <span class="o">=</span> <span class="n">y1</span><span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="n">x1</span>
-            <span class="c1">#remove all the lines below a threshold </span>
+            <span class="c1">#remove all the lines below a threshold to reduce noise</span>
             <span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">minM</span><span class="p">):</span>
                 <span class="n">lines_mq</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">m</span><span class="p">,</span><span class="n">q</span><span class="p">])</span>
                 <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
             <span class="c1">#else:</span>
             <span class="c1">#    print(&#39;drop&#39;)</span>
     
-
-    <span class="n">final_lines</span> <span class="o">=</span> <span class="p">[]</span>            
+    <span class="c1"># Aggragating the lines in 2 separate clusters by M and Q using kmeans</span>
+    <span class="c1"># Is a a bit of a rough solution, ideal would be to condense the lines in clusters with the goal</span>
+    <span class="c1"># of reducing the variance of the cluster as a mean to split a cluster and filter out outliers</span>
+    <span class="c1"># For better clustering would be ideal to replace M with it&#39;s polar equivalent in degree(or rads)</span>
+    <span class="n">final_lines</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">clusters</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lines_mq</span><span class="p">)</span><span class="o">&gt;</span><span class="n">clusters</span><span class="p">):</span>
-        <span class="c1">#sort the lines in 2 clusters by m and q to find similar lines </span>
-        <span class="c1">#assuming 2 clusters, left and right line, works for the given video but ...</span>
-        <span class="c1">#maybe 2 bin would be enough instead of kmeans ?</span>
         <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">clusters</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lines_mq</span><span class="p">))</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
         
         <span class="k">for</span> <span class="n">m</span><span class="p">,</span><span class="n">q</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">last_lines</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+                <span class="n">lm</span><span class="p">,</span><span class="n">lq</span> <span class="o">=</span> <span class="n">last_lines</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="n">lm</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span> <span class="o">+</span> <span class="n">lq</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+            <span class="n">last_lines</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="n">q</span><span class="p">]</span>
+            
             <span class="n">xTop</span> <span class="o">=</span> <span class="n">cap_infinity</span><span class="p">((</span><span class="n">yRoi</span><span class="o">-</span><span class="n">q</span><span class="p">)</span><span class="o">/</span><span class="n">m</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">width</span><span class="p">)</span>
             <span class="n">xBottom</span> <span class="o">=</span> <span class="n">cap_infinity</span><span class="p">((</span><span class="n">height</span><span class="o">-</span><span class="n">q</span><span class="p">)</span><span class="o">/</span><span class="n">m</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">width</span><span class="p">)</span>
             <span class="n">final_lines</span><span class="o">.</span><span class="n">append</span><span class="p">([[</span>
                 <span class="n">xTop</span><span class="p">,</span> <span class="n">yRoi</span><span class="p">,</span> <span class="n">xBottom</span><span class="p">,</span> <span class="n">height</span>
             <span class="p">]])</span>
     
+    <span class="c1"># merge the original image with the image of the lines</span>
     <span class="n">final_lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">final_lines</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
     <span class="n">line_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
     <span class="n">draw_lines</span><span class="p">(</span><span class="n">line_img</span><span class="p">,</span> <span class="n">final_lines</span><span class="p">,</span><span class="n">thickness</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -13804,7 +13814,7 @@ imageio.plugins.ffmpeg.download()</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[134]:</div>
+<div class="prompt input_prompt">In&nbsp;[197]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">white_output</span> <span class="o">=</span> <span class="n">unique_video_name</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
@@ -13823,193 +13833,26 @@ imageio.plugins.ffmpeg.download()</code></pre>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[MoviePy] &gt;&gt;&gt;&gt; Building video white_GVZAPDQHEB.mp4
-[MoviePy] Writing video white_GVZAPDQHEB.mp4
+<pre>[MoviePy] &gt;&gt;&gt;&gt; Building video white_WNVUTJOAXL.mp4
+[MoviePy] Writing video white_WNVUTJOAXL.mp4
 </pre>
 </div>
 </div>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>
-
-
-  0%|          | 0/222 [00:00&lt;?, ?it/s]
-
-
-  2%|▏         | 4/222 [00:00&lt;00:06, 32.60it/s]
-
-
-  4%|▎         | 8/222 [00:00&lt;00:06, 34.01it/s]
-
-
-  5%|▌         | 12/222 [00:00&lt;00:06, 34.97it/s]
-
-
-  7%|▋         | 16/222 [00:00&lt;00:05, 34.67it/s]
-
-
-  9%|▉         | 20/222 [00:00&lt;00:05, 34.95it/s]
-
-
- 11%|█         | 24/222 [00:00&lt;00:05, 35.74it/s]
-
-
- 13%|█▎        | 28/222 [00:00&lt;00:05, 35.95it/s]
-
-
- 14%|█▍        | 32/222 [00:00&lt;00:05, 36.23it/s]
-
-
- 16%|█▌        | 36/222 [00:00&lt;00:05, 36.52it/s]
-
-
- 18%|█▊        | 40/222 [00:01&lt;00:05, 33.70it/s]
-
-
- 20%|█▉        | 44/222 [00:01&lt;00:05, 31.07it/s]
-
-
- 22%|██▏       | 48/222 [00:01&lt;00:06, 27.64it/s]
-
-
- 23%|██▎       | 52/222 [00:01&lt;00:05, 29.41it/s]
-
-
- 25%|██▌       | 56/222 [00:01&lt;00:05, 31.73it/s]
-
-
- 27%|██▋       | 60/222 [00:01&lt;00:04, 33.26it/s]
-
-
- 29%|██▉       | 64/222 [00:01&lt;00:04, 34.60it/s]
-
-
- 31%|███       | 68/222 [00:02&lt;00:04, 34.82it/s]
-
-
- 32%|███▏      | 72/222 [00:02&lt;00:04, 35.49it/s]
-
-
- 34%|███▍      | 76/222 [00:02&lt;00:04, 35.85it/s]
-
-
- 36%|███▌      | 80/222 [00:02&lt;00:03, 36.17it/s]
-
-
- 38%|███▊      | 84/222 [00:02&lt;00:03, 36.46it/s]
-
-
- 40%|███▉      | 88/222 [00:02&lt;00:03, 36.66it/s]
-
-
- 41%|████▏     | 92/222 [00:02&lt;00:03, 37.02it/s]
-
-
- 43%|████▎     | 96/222 [00:02&lt;00:03, 37.60it/s]
-
-
- 45%|████▌     | 100/222 [00:02&lt;00:03, 38.03it/s]
-
-
- 47%|████▋     | 104/222 [00:02&lt;00:03, 37.16it/s]
-
-
- 49%|████▊     | 108/222 [00:03&lt;00:03, 37.34it/s]
-
-
- 50%|█████     | 112/222 [00:03&lt;00:02, 36.78it/s]
-
-
- 52%|█████▏    | 116/222 [00:03&lt;00:02, 36.89it/s]
-
-
- 54%|█████▍    | 120/222 [00:03&lt;00:02, 35.83it/s]
-
-
- 56%|█████▌    | 124/222 [00:03&lt;00:03, 32.02it/s]
-
-
- 58%|█████▊    | 128/222 [00:03&lt;00:03, 30.29it/s]
-
-
- 59%|█████▉    | 132/222 [00:03&lt;00:03, 29.41it/s]
-
-
- 61%|██████▏   | 136/222 [00:04&lt;00:02, 29.30it/s]
-
-
- 63%|██████▎   | 140/222 [00:04&lt;00:02, 30.12it/s]
-
-
- 65%|██████▍   | 144/222 [00:04&lt;00:02, 31.16it/s]
-
-
- 67%|██████▋   | 148/222 [00:04&lt;00:02, 32.03it/s]
-
-
- 69%|██████▉   | 153/222 [00:04&lt;00:02, 34.09it/s]
-
-
- 71%|███████   | 157/222 [00:04&lt;00:01, 35.59it/s]
-
-
- 73%|███████▎  | 161/222 [00:04&lt;00:01, 36.66it/s]
-
-
- 74%|███████▍  | 165/222 [00:04&lt;00:01, 37.54it/s]
-
-
- 76%|███████▌  | 169/222 [00:04&lt;00:01, 36.37it/s]
-
-
- 78%|███████▊  | 173/222 [00:05&lt;00:01, 35.55it/s]
-
-
- 80%|███████▉  | 177/222 [00:05&lt;00:01, 35.41it/s]
-
-
- 82%|████████▏ | 181/222 [00:05&lt;00:01, 36.30it/s]
-
-
- 83%|████████▎ | 185/222 [00:05&lt;00:00, 37.09it/s]
-
-
- 85%|████████▌ | 189/222 [00:05&lt;00:00, 37.90it/s]
-
-
- 87%|████████▋ | 194/222 [00:05&lt;00:00, 38.84it/s]
-
-
- 89%|████████▉ | 198/222 [00:05&lt;00:00, 39.04it/s]
-
-
- 91%|█████████ | 202/222 [00:05&lt;00:00, 39.12it/s]
-
-
- 93%|█████████▎| 207/222 [00:05&lt;00:00, 39.47it/s]
-
-
- 95%|█████████▌| 211/222 [00:06&lt;00:00, 39.05it/s]
-
-
- 97%|█████████▋| 215/222 [00:06&lt;00:00, 37.31it/s]
-
-
- 99%|█████████▊| 219/222 [00:06&lt;00:00, 36.52it/s]
-
-
-100%|█████████▉| 221/222 [00:06&lt;00:00, 35.08it/s]</pre>
+<pre>100%|█████████▉| 221/222 [00:05&lt;00:00, 37.25it/s]
+</pre>
 </div>
 </div>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[MoviePy] Done.
-[MoviePy] &gt;&gt;&gt;&gt; Video ready: white_GVZAPDQHEB.mp4 
+[MoviePy] &gt;&gt;&gt;&gt; Video ready: white_WNVUTJOAXL.mp4 
 
-CPU times: user 6.32 s, sys: 302 ms, total: 6.62 s
-Wall time: 6.66 s
+CPU times: user 5.93 s, sys: 319 ms, total: 6.25 s
+Wall time: 6.28 s
 </pre>
 </div>
 </div>
@@ -14030,7 +13873,7 @@ Wall time: 6.66 s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[128]:</div>
+<div class="prompt input_prompt">In&nbsp;[198]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
@@ -14048,12 +13891,12 @@ Wall time: 6.66 s
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[128]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[198]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
 <video width="960" height="540" controls>
-  <source src="white_EJDVBFRCIF.mp4">
+  <source src="white_WNVUTJOAXL.mp4">
 </video>
 
 </div>
@@ -14087,7 +13930,7 @@ Wall time: 6.66 s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[129]:</div>
+<div class="prompt input_prompt">In&nbsp;[199]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">yellow_output</span> <span class="o">=</span> <span class="n">unique_video_name</span><span class="p">(</span><span class="s1">&#39;yellow&#39;</span><span class="p">)</span>
@@ -14106,502 +13949,26 @@ Wall time: 6.66 s
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[MoviePy] &gt;&gt;&gt;&gt; Building video yellow_TZKYLBGKUK.mp4
-[MoviePy] Writing video yellow_TZKYLBGKUK.mp4
+<pre>[MoviePy] &gt;&gt;&gt;&gt; Building video yellow_VBQGWZXFHM.mp4
+[MoviePy] Writing video yellow_VBQGWZXFHM.mp4
 </pre>
 </div>
 </div>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>
-
-
-  0%|          | 0/682 [00:00&lt;?, ?it/s]
-
-
-  1%|          | 4/682 [00:00&lt;00:20, 32.56it/s]
-
-
-  1%|          | 8/682 [00:00&lt;00:19, 34.33it/s]
-
-
-  2%|▏         | 12/682 [00:00&lt;00:19, 35.25it/s]
-
-
-  2%|▏         | 16/682 [00:00&lt;00:18, 36.26it/s]
-
-
-  3%|▎         | 20/682 [00:00&lt;00:17, 37.16it/s]
-
-
-  4%|▎         | 24/682 [00:00&lt;00:17, 37.86it/s]
-
-
-  4%|▍         | 28/682 [00:00&lt;00:17, 38.38it/s]
-
-
-  5%|▍         | 32/682 [00:00&lt;00:16, 38.54it/s]
-
-
-  5%|▌         | 36/682 [00:00&lt;00:16, 38.48it/s]
-
-
-  6%|▌         | 40/682 [00:01&lt;00:18, 35.37it/s]
-
-
-  6%|▋         | 44/682 [00:01&lt;00:18, 34.12it/s]
-
-
-  7%|▋         | 48/682 [00:01&lt;00:18, 34.45it/s]
-
-
-  8%|▊         | 52/682 [00:01&lt;00:18, 33.68it/s]
-
-
-  8%|▊         | 56/682 [00:01&lt;00:18, 34.41it/s]
-
-
-  9%|▉         | 60/682 [00:01&lt;00:18, 34.54it/s]
-
-
-  9%|▉         | 64/682 [00:01&lt;00:18, 33.78it/s]
-
-
- 10%|▉         | 68/682 [00:01&lt;00:18, 33.96it/s]
-
-
- 11%|█         | 72/682 [00:02&lt;00:17, 34.93it/s]
-
-
- 11%|█         | 76/682 [00:02&lt;00:17, 35.35it/s]
-
-
- 12%|█▏        | 80/682 [00:02&lt;00:16, 35.55it/s]
-
-
- 12%|█▏        | 84/682 [00:02&lt;00:16, 35.80it/s]
-
-
- 13%|█▎        | 88/682 [00:02&lt;00:16, 35.65it/s]
-
-
- 13%|█▎        | 92/682 [00:02&lt;00:16, 35.49it/s]
-
-
- 14%|█▍        | 96/682 [00:02&lt;00:16, 35.73it/s]
-
-
- 15%|█▍        | 100/682 [00:02&lt;00:16, 35.16it/s]
-
-
- 15%|█▌        | 104/682 [00:02&lt;00:18, 31.61it/s]
-
-
- 16%|█▌        | 108/682 [00:03&lt;00:17, 32.86it/s]
-
-
- 16%|█▋        | 112/682 [00:03&lt;00:16, 34.17it/s]
-
-
- 17%|█▋        | 116/682 [00:03&lt;00:16, 33.93it/s]
-
-
- 18%|█▊        | 120/682 [00:03&lt;00:17, 32.77it/s]
-
-
- 18%|█▊        | 124/682 [00:03&lt;00:17, 31.49it/s]
-
-
- 19%|█▉        | 128/682 [00:03&lt;00:17, 31.79it/s]
-
-
- 19%|█▉        | 132/682 [00:03&lt;00:16, 33.55it/s]
-
-
- 20%|█▉        | 136/682 [00:03&lt;00:16, 33.95it/s]
-
-
- 21%|██        | 140/682 [00:04&lt;00:15, 35.18it/s]
-
-
- 21%|██        | 144/682 [00:04&lt;00:14, 36.01it/s]
-
-
- 22%|██▏       | 149/682 [00:04&lt;00:14, 37.23it/s]
-
-
- 22%|██▏       | 153/682 [00:04&lt;00:15, 34.17it/s]
-
-
- 23%|██▎       | 158/682 [00:04&lt;00:14, 35.77it/s]
-
-
- 24%|██▍       | 162/682 [00:04&lt;00:14, 36.39it/s]
-
-
- 24%|██▍       | 166/682 [00:04&lt;00:13, 37.34it/s]
-
-
- 25%|██▌       | 171/682 [00:04&lt;00:13, 38.22it/s]
-
-
- 26%|██▌       | 176/682 [00:04&lt;00:13, 38.87it/s]
-
-
- 27%|██▋       | 181/682 [00:05&lt;00:12, 39.32it/s]
-
-
- 27%|██▋       | 186/682 [00:05&lt;00:12, 39.38it/s]
-
-
- 28%|██▊       | 191/682 [00:05&lt;00:12, 39.74it/s]
-
-
- 29%|██▊       | 196/682 [00:05&lt;00:12, 39.60it/s]
-
-
- 29%|██▉       | 200/682 [00:05&lt;00:12, 38.24it/s]
-
-
- 30%|██▉       | 204/682 [00:05&lt;00:12, 37.65it/s]
-
-
- 30%|███       | 208/682 [00:05&lt;00:12, 38.18it/s]
-
-
- 31%|███       | 212/682 [00:05&lt;00:12, 38.69it/s]
-
-
- 32%|███▏      | 216/682 [00:05&lt;00:11, 38.90it/s]
-
-
- 32%|███▏      | 220/682 [00:06&lt;00:11, 38.98it/s]
-
-
- 33%|███▎      | 224/682 [00:06&lt;00:11, 39.27it/s]
-
-
- 33%|███▎      | 228/682 [00:06&lt;00:11, 39.34it/s]
-
-
- 34%|███▍      | 232/682 [00:06&lt;00:11, 39.46it/s]
-
-
- 35%|███▍      | 236/682 [00:06&lt;00:11, 39.29it/s]
-
-
- 35%|███▌      | 240/682 [00:06&lt;00:11, 39.15it/s]
-
-
- 36%|███▌      | 245/682 [00:06&lt;00:11, 39.55it/s]
-
-
- 37%|███▋      | 249/682 [00:06&lt;00:10, 39.47it/s]
-
-
- 37%|███▋      | 253/682 [00:06&lt;00:11, 37.95it/s]
-
-
- 38%|███▊      | 257/682 [00:07&lt;00:11, 37.15it/s]
-
-
- 38%|███▊      | 262/682 [00:07&lt;00:10, 38.46it/s]
-
-
- 39%|███▉      | 267/682 [00:07&lt;00:10, 39.24it/s]
-
-
- 40%|███▉      | 272/682 [00:07&lt;00:10, 39.85it/s]
-
-
- 41%|████      | 277/682 [00:07&lt;00:10, 40.35it/s]
-
-
- 41%|████▏     | 282/682 [00:07&lt;00:09, 40.46it/s]
-
-
- 42%|████▏     | 287/682 [00:07&lt;00:09, 40.53it/s]
-
-
- 43%|████▎     | 292/682 [00:07&lt;00:09, 40.56it/s]
-
-
- 44%|████▎     | 297/682 [00:08&lt;00:09, 40.09it/s]
-
-
- 44%|████▍     | 302/682 [00:08&lt;00:10, 37.82it/s]
-
-
- 45%|████▌     | 307/682 [00:08&lt;00:09, 38.66it/s]
-
-
- 46%|████▌     | 312/682 [00:08&lt;00:09, 39.36it/s]
-
-
- 46%|████▋     | 316/682 [00:08&lt;00:09, 39.44it/s]
-
-
- 47%|████▋     | 321/682 [00:08&lt;00:09, 39.63it/s]
-
-
- 48%|████▊     | 326/682 [00:08&lt;00:08, 39.84it/s]
-
-
- 48%|████▊     | 330/682 [00:08&lt;00:10, 34.14it/s]
-
-
- 49%|████▉     | 334/682 [00:09&lt;00:09, 34.94it/s]
-
-
- 50%|████▉     | 339/682 [00:09&lt;00:09, 36.12it/s]
-
-
- 50%|█████     | 343/682 [00:09&lt;00:09, 37.06it/s]
-
-
- 51%|█████     | 347/682 [00:09&lt;00:09, 37.14it/s]
-
-
- 51%|█████▏    | 351/682 [00:09&lt;00:08, 37.48it/s]
-
-
- 52%|█████▏    | 355/682 [00:09&lt;00:08, 37.94it/s]
-
-
- 53%|█████▎    | 359/682 [00:09&lt;00:08, 38.45it/s]
-
-
- 53%|█████▎    | 363/682 [00:09&lt;00:08, 38.15it/s]
-
-
- 54%|█████▍    | 367/682 [00:09&lt;00:08, 37.47it/s]
-
-
- 54%|█████▍    | 371/682 [00:10&lt;00:08, 36.62it/s]
-
-
- 55%|█████▌    | 376/682 [00:10&lt;00:08, 37.79it/s]
-
-
- 56%|█████▌    | 381/682 [00:10&lt;00:07, 38.76it/s]
-
-
- 57%|█████▋    | 386/682 [00:10&lt;00:07, 39.51it/s]
-
-
- 57%|█████▋    | 391/682 [00:10&lt;00:07, 39.92it/s]
-
-
- 58%|█████▊    | 396/682 [00:10&lt;00:07, 40.62it/s]
-
-
- 59%|█████▉    | 401/682 [00:10&lt;00:06, 40.66it/s]
-
-
- 60%|█████▉    | 406/682 [00:10&lt;00:06, 40.80it/s]
-
-
- 60%|██████    | 411/682 [00:10&lt;00:06, 40.86it/s]
-
-
- 61%|██████    | 416/682 [00:11&lt;00:06, 39.78it/s]
-
-
- 62%|██████▏   | 421/682 [00:11&lt;00:06, 40.08it/s]
-
-
- 62%|██████▏   | 426/682 [00:11&lt;00:06, 40.21it/s]
-
-
- 63%|██████▎   | 431/682 [00:11&lt;00:06, 39.28it/s]
-
-
- 64%|██████▍   | 435/682 [00:11&lt;00:06, 37.61it/s]
-
-
- 64%|██████▍   | 439/682 [00:11&lt;00:06, 37.52it/s]
-
-
- 65%|██████▍   | 443/682 [00:11&lt;00:06, 37.74it/s]
-
-
- 66%|██████▌   | 448/682 [00:11&lt;00:06, 38.60it/s]
-
-
- 66%|██████▋   | 452/682 [00:12&lt;00:05, 38.87it/s]
-
-
- 67%|██████▋   | 457/682 [00:12&lt;00:05, 39.37it/s]
-
-
- 68%|██████▊   | 461/682 [00:12&lt;00:05, 39.48it/s]
-
-
- 68%|██████▊   | 465/682 [00:12&lt;00:05, 38.14it/s]
-
-
- 69%|██████▉   | 469/682 [00:12&lt;00:05, 36.97it/s]
-
-
- 69%|██████▉   | 473/682 [00:12&lt;00:05, 37.79it/s]
-
-
- 70%|██████▉   | 477/682 [00:12&lt;00:05, 38.29it/s]
-
-
- 71%|███████   | 481/682 [00:12&lt;00:05, 38.67it/s]
-
-
- 71%|███████   | 485/682 [00:12&lt;00:05, 38.80it/s]
-
-
- 72%|███████▏  | 489/682 [00:13&lt;00:04, 38.77it/s]
-
-
- 72%|███████▏  | 493/682 [00:13&lt;00:04, 38.13it/s]
-
-
- 73%|███████▎  | 497/682 [00:13&lt;00:04, 37.45it/s]
-
-
- 73%|███████▎  | 501/682 [00:13&lt;00:04, 37.57it/s]
-
-
- 74%|███████▍  | 505/682 [00:13&lt;00:04, 37.47it/s]
-
-
- 75%|███████▍  | 510/682 [00:13&lt;00:04, 38.23it/s]
-
-
- 75%|███████▌  | 514/682 [00:13&lt;00:04, 38.68it/s]
-
-
- 76%|███████▌  | 519/682 [00:13&lt;00:04, 39.08it/s]
-
-
- 77%|███████▋  | 523/682 [00:13&lt;00:04, 39.08it/s]
-
-
- 77%|███████▋  | 527/682 [00:14&lt;00:04, 37.46it/s]
-
-
- 78%|███████▊  | 531/682 [00:14&lt;00:04, 37.40it/s]
-
-
- 79%|███████▊  | 536/682 [00:14&lt;00:03, 38.27it/s]
-
-
- 79%|███████▉  | 541/682 [00:14&lt;00:03, 38.93it/s]
-
-
- 80%|███████▉  | 545/682 [00:14&lt;00:03, 37.96it/s]
-
-
- 80%|████████  | 549/682 [00:14&lt;00:03, 36.41it/s]
-
-
- 81%|████████  | 553/682 [00:14&lt;00:03, 35.99it/s]
-
-
- 82%|████████▏ | 557/682 [00:14&lt;00:03, 36.43it/s]
-
-
- 82%|████████▏ | 561/682 [00:14&lt;00:03, 35.47it/s]
-
-
- 83%|████████▎ | 565/682 [00:15&lt;00:03, 35.18it/s]
-
-
- 83%|████████▎ | 569/682 [00:15&lt;00:03, 36.44it/s]
-
-
- 84%|████████▍ | 573/682 [00:15&lt;00:02, 36.91it/s]
-
-
- 85%|████████▍ | 577/682 [00:15&lt;00:02, 37.37it/s]
-
-
- 85%|████████▌ | 582/682 [00:15&lt;00:02, 38.12it/s]
-
-
- 86%|████████▌ | 586/682 [00:15&lt;00:02, 38.45it/s]
-
-
- 87%|████████▋ | 591/682 [00:15&lt;00:02, 38.97it/s]
-
-
- 87%|████████▋ | 595/682 [00:15&lt;00:02, 39.09it/s]
-
-
- 88%|████████▊ | 599/682 [00:15&lt;00:02, 38.98it/s]
-
-
- 88%|████████▊ | 603/682 [00:16&lt;00:02, 39.16it/s]
-
-
- 89%|████████▉ | 608/682 [00:16&lt;00:01, 39.64it/s]
-
-
- 90%|████████▉ | 612/682 [00:16&lt;00:01, 39.72it/s]
-
-
- 90%|█████████ | 617/682 [00:16&lt;00:01, 39.97it/s]
-
-
- 91%|█████████ | 622/682 [00:16&lt;00:01, 40.29it/s]
-
-
- 92%|█████████▏| 627/682 [00:16&lt;00:01, 39.62it/s]
-
-
- 93%|█████████▎| 631/682 [00:16&lt;00:01, 37.93it/s]
-
-
- 93%|█████████▎| 635/682 [00:16&lt;00:01, 37.55it/s]
-
-
- 94%|█████████▎| 639/682 [00:16&lt;00:01, 37.62it/s]
-
-
- 94%|█████████▍| 643/682 [00:17&lt;00:01, 38.19it/s]
-
-
- 95%|█████████▍| 647/682 [00:17&lt;00:00, 38.54it/s]
-
-
- 95%|█████████▌| 651/682 [00:17&lt;00:00, 38.63it/s]
-
-
- 96%|█████████▌| 656/682 [00:17&lt;00:00, 39.15it/s]
-
-
- 97%|█████████▋| 661/682 [00:17&lt;00:00, 39.41it/s]
-
-
- 98%|█████████▊| 666/682 [00:17&lt;00:00, 39.48it/s]
-
-
- 98%|█████████▊| 670/682 [00:17&lt;00:00, 38.89it/s]
-
-
- 99%|█████████▉| 674/682 [00:17&lt;00:00, 38.56it/s]
-
-
-100%|█████████▉| 679/682 [00:17&lt;00:00, 39.14it/s]
-
-
-100%|█████████▉| 681/682 [00:18&lt;00:00, 37.79it/s]</pre>
+<pre>100%|█████████▉| 681/682 [00:19&lt;00:00, 35.01it/s]
+</pre>
 </div>
 </div>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[MoviePy] Done.
-[MoviePy] &gt;&gt;&gt;&gt; Video ready: yellow_TZKYLBGKUK.mp4 
+[MoviePy] &gt;&gt;&gt;&gt; Video ready: yellow_VBQGWZXFHM.mp4 
 
-CPU times: user 18.3 s, sys: 733 ms, total: 19 s
-Wall time: 18.5 s
+CPU times: user 19 s, sys: 1.29 s, total: 20.3 s
+Wall time: 19.8 s
 </pre>
 </div>
 </div>
@@ -14612,7 +13979,7 @@ Wall time: 18.5 s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[135]:</div>
+<div class="prompt input_prompt">In&nbsp;[200]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
@@ -14630,12 +13997,12 @@ Wall time: 18.5 s
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[135]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[200]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
 <video width="960" height="540" controls>
-  <source src="yellow_TZKYLBGKUK.mp4">
+  <source src="yellow_VBQGWZXFHM.mp4">
 </video>
 
 </div>
@@ -14668,7 +14035,7 @@ Wall time: 18.5 s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[136]:</div>
+<div class="prompt input_prompt">In&nbsp;[201]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">challenge_output</span> <span class="o">=</span> <span class="n">unique_video_name</span><span class="p">(</span><span class="s1">&#39;challenge&#39;</span><span class="p">)</span>
@@ -14687,284 +14054,15 @@ Wall time: 18.5 s
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[MoviePy] &gt;&gt;&gt;&gt; Building video challenge_OZEIXVUXCV.mp4
-[MoviePy] Writing video challenge_OZEIXVUXCV.mp4
+<pre>[MoviePy] &gt;&gt;&gt;&gt; Building video challenge_JGRWEAWYGF.mp4
+[MoviePy] Writing video challenge_JGRWEAWYGF.mp4
 </pre>
 </div>
 </div>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>
-
-
-  0%|          | 0/251 [00:00&lt;?, ?it/s]
-
-
-  1%|          | 2/251 [00:00&lt;00:14, 16.88it/s]
-
-
-  2%|▏         | 5/251 [00:00&lt;00:13, 18.03it/s]
-
-
-  3%|▎         | 8/251 [00:00&lt;00:12, 19.39it/s]
-
-
-  4%|▍         | 11/251 [00:00&lt;00:11, 20.13it/s]
-
-
-  5%|▌         | 13/251 [00:00&lt;00:12, 19.47it/s]
-
-
-  6%|▌         | 15/251 [00:00&lt;00:12, 19.61it/s]
-
-
-  7%|▋         | 18/251 [00:00&lt;00:11, 19.88it/s]
-
-
-  8%|▊         | 20/251 [00:00&lt;00:11, 19.75it/s]
-
-
-  9%|▉         | 23/251 [00:01&lt;00:11, 20.12it/s]
-
-
- 10%|▉         | 25/251 [00:01&lt;00:11, 19.71it/s]
-
-
- 11%|█         | 27/251 [00:01&lt;00:11, 19.06it/s]
-
-
- 12%|█▏        | 29/251 [00:01&lt;00:12, 17.52it/s]
-
-
- 13%|█▎        | 32/251 [00:01&lt;00:11, 18.45it/s]
-
-
- 14%|█▍        | 35/251 [00:01&lt;00:11, 19.50it/s]
-
-
- 15%|█▌        | 38/251 [00:01&lt;00:10, 19.99it/s]
-
-
- 16%|█▋        | 41/251 [00:02&lt;00:10, 20.04it/s]
-
-
- 18%|█▊        | 44/251 [00:02&lt;00:10, 19.91it/s]
-
-
- 19%|█▊        | 47/251 [00:02&lt;00:10, 19.63it/s]
-
-
- 20%|█▉        | 49/251 [00:02&lt;00:10, 19.14it/s]
-
-
- 21%|██        | 52/251 [00:02&lt;00:10, 19.72it/s]
-
-
- 22%|██▏       | 55/251 [00:02&lt;00:09, 20.21it/s]
-
-
- 23%|██▎       | 58/251 [00:02&lt;00:09, 20.19it/s]
-
-
- 24%|██▍       | 61/251 [00:03&lt;00:09, 20.33it/s]
-
-
- 25%|██▌       | 64/251 [00:03&lt;00:09, 20.48it/s]
-
-
- 27%|██▋       | 67/251 [00:03&lt;00:09, 20.05it/s]
-
-
- 28%|██▊       | 70/251 [00:03&lt;00:09, 20.00it/s]
-
-
- 29%|██▉       | 73/251 [00:03&lt;00:08, 20.23it/s]
-
-
- 30%|███       | 76/251 [00:03&lt;00:08, 20.42it/s]
-
-
- 31%|███▏      | 79/251 [00:03&lt;00:08, 19.55it/s]
-
-
- 32%|███▏      | 81/251 [00:04&lt;00:08, 18.93it/s]
-
-
- 33%|███▎      | 83/251 [00:04&lt;00:09, 18.57it/s]
-
-
- 34%|███▍      | 85/251 [00:04&lt;00:08, 18.91it/s]
-
-
- 35%|███▌      | 88/251 [00:04&lt;00:08, 19.24it/s]
-
-
- 36%|███▌      | 90/251 [00:04&lt;00:08, 19.30it/s]
-
-
- 37%|███▋      | 92/251 [00:04&lt;00:08, 19.45it/s]
-
-
- 38%|███▊      | 95/251 [00:04&lt;00:07, 20.08it/s]
-
-
- 39%|███▉      | 98/251 [00:04&lt;00:07, 20.33it/s]
-
-
- 40%|████      | 101/251 [00:05&lt;00:07, 20.33it/s]
-
-
- 41%|████▏     | 104/251 [00:05&lt;00:07, 20.66it/s]
-
-
- 43%|████▎     | 107/251 [00:05&lt;00:06, 20.66it/s]
-
-
- 44%|████▍     | 110/251 [00:05&lt;00:06, 20.66it/s]
-
-
- 45%|████▌     | 113/251 [00:05&lt;00:06, 21.16it/s]
-
-
- 46%|████▌     | 116/251 [00:05&lt;00:06, 21.46it/s]
-
-
- 47%|████▋     | 119/251 [00:05&lt;00:06, 21.84it/s]
-
-
- 49%|████▊     | 122/251 [00:06&lt;00:05, 21.83it/s]
-
-
- 50%|████▉     | 125/251 [00:06&lt;00:05, 22.01it/s]
-
-
- 51%|█████     | 128/251 [00:06&lt;00:05, 22.09it/s]
-
-
- 52%|█████▏    | 131/251 [00:06&lt;00:05, 22.04it/s]
-
-
- 53%|█████▎    | 134/251 [00:06&lt;00:05, 21.80it/s]
-
-
- 55%|█████▍    | 137/251 [00:06&lt;00:05, 21.65it/s]
-
-
- 56%|█████▌    | 140/251 [00:06&lt;00:05, 21.60it/s]
-
-
- 57%|█████▋    | 143/251 [00:06&lt;00:04, 21.63it/s]
-
-
- 58%|█████▊    | 146/251 [00:07&lt;00:04, 21.27it/s]
-
-
- 59%|█████▉    | 149/251 [00:07&lt;00:04, 20.76it/s]
-
-
- 61%|██████    | 152/251 [00:07&lt;00:04, 20.79it/s]
-
-
- 62%|██████▏   | 155/251 [00:07&lt;00:04, 21.22it/s]
-
-
- 63%|██████▎   | 158/251 [00:07&lt;00:04, 21.57it/s]
-
-
- 64%|██████▍   | 161/251 [00:07&lt;00:04, 21.56it/s]
-
-
- 65%|██████▌   | 164/251 [00:07&lt;00:03, 22.01it/s]
-
-
- 67%|██████▋   | 167/251 [00:08&lt;00:03, 21.78it/s]
-
-
- 68%|██████▊   | 170/251 [00:08&lt;00:03, 21.72it/s]
-
-
- 69%|██████▉   | 173/251 [00:08&lt;00:03, 21.83it/s]
-
-
- 70%|███████   | 176/251 [00:08&lt;00:03, 21.86it/s]
-
-
- 71%|███████▏  | 179/251 [00:08&lt;00:03, 21.74it/s]
-
-
- 73%|███████▎  | 182/251 [00:08&lt;00:03, 21.87it/s]
-
-
- 74%|███████▎  | 185/251 [00:08&lt;00:02, 22.03it/s]
-
-
- 75%|███████▍  | 188/251 [00:09&lt;00:02, 22.00it/s]
-
-
- 76%|███████▌  | 191/251 [00:09&lt;00:02, 22.09it/s]
-
-
- 77%|███████▋  | 194/251 [00:09&lt;00:02, 21.91it/s]
-
-
- 78%|███████▊  | 197/251 [00:09&lt;00:02, 22.02it/s]
-
-
- 80%|███████▉  | 200/251 [00:09&lt;00:02, 22.04it/s]
-
-
- 81%|████████  | 203/251 [00:09&lt;00:02, 21.99it/s]
-
-
- 82%|████████▏ | 206/251 [00:09&lt;00:02, 22.16it/s]
-
-
- 83%|████████▎ | 209/251 [00:10&lt;00:01, 22.38it/s]
-
-
- 84%|████████▍ | 212/251 [00:10&lt;00:01, 22.09it/s]
-
-
- 86%|████████▌ | 215/251 [00:10&lt;00:01, 22.25it/s]
-
-
- 87%|████████▋ | 218/251 [00:10&lt;00:01, 22.30it/s]
-
-
- 88%|████████▊ | 221/251 [00:10&lt;00:01, 22.15it/s]
-
-
- 89%|████████▉ | 224/251 [00:10&lt;00:01, 21.44it/s]
-
-
- 90%|█████████ | 227/251 [00:10&lt;00:01, 21.30it/s]
-
-
- 92%|█████████▏| 230/251 [00:10&lt;00:00, 21.66it/s]
-
-
- 93%|█████████▎| 233/251 [00:11&lt;00:00, 21.84it/s]
-
-
- 94%|█████████▍| 236/251 [00:11&lt;00:00, 22.12it/s]
-
-
- 95%|█████████▌| 239/251 [00:11&lt;00:00, 22.39it/s]
-
-
- 96%|█████████▋| 242/251 [00:11&lt;00:00, 22.61it/s]
-
-
- 98%|█████████▊| 245/251 [00:11&lt;00:00, 22.71it/s]
-
-
- 99%|█████████▉| 248/251 [00:11&lt;00:00, 22.94it/s]
-
-
-100%|██████████| 251/251 [00:11&lt;00:00, 23.01it/s]
-
-
+<pre>100%|██████████| 251/251 [00:12&lt;00:00, 21.46it/s]
 </pre>
 </div>
 </div>
@@ -14972,10 +14070,10 @@ Wall time: 18.5 s
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[MoviePy] Done.
-[MoviePy] &gt;&gt;&gt;&gt; Video ready: challenge_OZEIXVUXCV.mp4 
+[MoviePy] &gt;&gt;&gt;&gt; Video ready: challenge_JGRWEAWYGF.mp4 
 
-CPU times: user 11.6 s, sys: 1.04 s, total: 12.7 s
-Wall time: 12.7 s
+CPU times: user 12.1 s, sys: 1.13 s, total: 13.2 s
+Wall time: 13.4 s
 </pre>
 </div>
 </div>
@@ -14986,7 +14084,7 @@ Wall time: 12.7 s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[137]:</div>
+<div class="prompt input_prompt">In&nbsp;[202]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
@@ -15004,18 +14102,44 @@ Wall time: 12.7 s
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[137]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[202]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
 <video width="960" height="540" controls>
-  <source src="challenge_OZEIXVUXCV.mp4">
+  <source src="challenge_JGRWEAWYGF.mp4">
 </video>
 
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
 </div>
 </div>
 
