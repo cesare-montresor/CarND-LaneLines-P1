@@ -9,18 +9,21 @@ The goals / steps of this project are the following:
 ###1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
 The pipeline is composed of main 6 steps:
-1. Image conversion to grayscale and blur
-2. Edge detection
-3. Image masking
-4. Lines detection 
-5. Lines filtering and clustering
-6. Final frame assembly
+
+1. Image conversion to grayscale and blur   
+2. Edge detection   
+3. Image masking   
+4. Lines detection    
+5. Lines filtering and clustering   
+6. Final frame assembly   
+
 
 The original image is turned to grayscale and blurred in order to perform the edge detection. 
-Once the edges are extracted, the image is masked to be able to select only the region of the image where we expect to find the lane lines.
-The line detection is performed using hough transform, that return an unordered list of segments represented by a pair of coordinates.
+Once the edges are extracted, the image is masked to be able to select only the region of the image where we expect to find the lane lines. The line detection is performed using hough transform, that return an unordered list of segments represented by a pair of coordinates.
+
 Those segments, are first filtered in order to remove some noise, based on steepness of the line. Then they are aggregated into 2 homogeneous groups using kmeans on the M and Q parameters of the lines.
-For each cluster is draw a line, on and empty image, using the averaged M and Q from the beginning of the region of interest to the bottom of the original frame.
+For each cluster is drawn a line, on and empty image, using the averaged M and Q from the beginning of the region of interest to the bottom of the original frame.
+
 In order to stabilize the lines and reduce the flickering, the lines are averaged with the one draw on the previous frame. 
 The original image and the one just generated are then blend into one and returned to MoviePy to be reassembled into a video.
 
