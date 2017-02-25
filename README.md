@@ -11,9 +11,10 @@ When we drive, we use our eyes to decide where to go.  The lines on the road tha
 In this project you will detect lane lines in images using Python and OpenCV.  OpenCV means "Open-Source Computer Vision", which is a package that has many useful tools for analyzing images.  
 
 Project Structure:
-- P1.ipynb:        Main project file   
-- P1.html:         Exported P1.ipynb in HTML   
-- while_*.mp4:     Result video for the first video   
+- writeup.md:       Project writeup
+- P1.ipynb:         Main project file   
+- P1.html:          Exported P1.ipynb in HTML   
+- while_*.mp4:      Result video for the first video   
 - yellow_*.mp4:     Result video for the second video   
 - challenge_*.mp4:  Result video for the thirt video   
 
